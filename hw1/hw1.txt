@@ -1,0 +1,75 @@
+
+
+baby.t.test <- function(x, mu=0, conf.level=.95) {
+  stopifnot(length(x) >= 2)
+  stopifnot((0 < conf.level) & (conf.level < 1))
+  n <- length(x)
+  x.bar <- mean(x)
+  s.x <- sd(x)
+  t <- (x.bar - mu) / (s.x / sqrt(n))
+  return.list <- list() # set up return.list as return value
+  return.list$statistic <- t
+  return.list$parameter <- n - 1
+  return.list$p.value <- 2*pt(q=-abs(t), df=n-1)
+  alpha <- 1 - conf.level
+  t.for.conf.level <- -qt(p=alpha/2, df=n-1)
+  error.margin <- t.for.conf.level * s.x / sqrt(n)
+  return.list$conf.int <- c(x.bar - error.margin, x.bar + error.margin)
+  return.list$estimate <- x.bar
+  return.list$null.value <- mu
+  return(return.list)
+}
+
+
+# test case
+baby.t <- baby.t.test(1:10, 5, .90)
+print(str(baby.t))
+t <- t.test(x=1:10, mu=5, conf.level=.90) # Call the real function to check mine.
+
+
+# Note: as.numeric(), below, removes names from components of t
+stopifnot(isTRUE(all.equal(baby.t$statistic, as.numeric(t$statistic))))
+stopifnot(isTRUE(all.equal(baby.t$parameter ,  as.numeric(t$parameter))))
+stopifnot(isTRUE(all.equal(baby.t$p.value ,  as.numeric(t$p.value))))
+stopifnot(isTRUE(all.equal(baby.t$conf.int ,  as.numeric(t$conf.int))))
+stopifnot(isTRUE(all.equal(baby.t$estimate ,  as.numeric(t$estimate))))
+stopifnot(isTRUE(all.equal(baby.t$null.value ,  as.numeric(t$null.value))))
+
+
+Four score and seven years ago our fathers brought forth on this
+continent, a new nation, conceived in Liberty, and dedicated to the
+proposition that all men are created equal.
+Now we are engaged in a great civil war, testing whether that nation,
+or any nation so conceived and so dedicated, can long endure. We are
+met on a great battle-field of that war. We have come to dedicate a
+portion of that field, as a final resting place for those who here
+gave their lives that that nation might live. It is altogether fitting
+and proper that we should do this.
+
+But, in a larger sense, we can not dedicate—we can not consecrate—we
+can not hallow—this ground. The brave men, living and dead, who
+struggled here, have consecrated it, far above our poor power to add
+or detract. The world will little note, nor long remember what we say
+here, but it can never forget what they did here. It is for us the
+living, rather, to be dedicated here to the unfinished work which they
+who fought here have thus far so nobly advanced. It is rather for us
+to be here dedicated to the great task remaining before us—that from
+these honored dead we take increased devotion to that cause for which
+they gave the last full measure of devotion—that we here highly
+resolve that these dead shall not have died in vain—that this nation,
+under God, shall have a new birth of freedom—and that government of
+the people, by the people, for the people, shall not perish from the
+earth.
+
+
+6789 jbrown  
+9123 sroukos 
+3456 chen    
+8912 jjuniper
+
+
+Beyond just being able to edit plain text files, Emacs includes special features to help you write in many different human languages and programming/markup languages, as well as tools for compiling, running, and testing programs. Emacs can also integrate with GDB to provide an IDE, compare two files and highlight their differences, work as a file manager, read news, mail, and RSS feeds, and even play games!
+
+
+A short emacs exercise:
+Open roster.txt. Save it as information.txt. Covert the latter file so that each line contains a student's name, campus id, email address, and the last four digits of campus id, seperated by a tab. For example, the first row should be Brown,Joe 123456789 jbrown@wisc.edu 6789. Then split windows horizontally, open roster.txt in the right window, resize the two windows to the same size, and compare the two txt files (Hint: M-x ediff).
