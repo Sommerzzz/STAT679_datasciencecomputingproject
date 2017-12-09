@@ -5,22 +5,28 @@
 //
 
 // sd.cxx
+
 // This is a group work exercise.
 //
+
 // Write a program called "sd.cxx" that computes the sample standard
 // deviation of a set of data.
 //
+
 // Your program should include three functions:
 //
+
 // - mean(), which takes two parameters:
 //   - n, an integer, the length of the array being passed
 //   - x, an array of doubles (as a pointer), the data
 //
+
 // - sd(), which takes two parameters:
 //   - n, an integer, the length of the array being passed
 //   - x, an array of doubles (as a pointer), the data
 //   sd() should call mean() as part of its calculation
 //
+
 // - main(), which should:
 //   - prompt (to standard error) the user for the number of points
 //   - read (from standard input) in the number of points and then the
