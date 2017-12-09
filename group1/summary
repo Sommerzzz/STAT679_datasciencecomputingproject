@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#summary: it reads from file to get min, max, or median value.
+if [[ $# -ne 2 ]]; then
+   echo "usage: summary <file> <type>"
+   exit 0
+fi
+
+file=$1
+type=$2
+
+if [[($type == "max")]]; then
+   tail -1 sorted.txt
+elif [[($type == "min")]]; then
+   head -1 sorted.txt
+elif [[($type == "median")]]; then
+   awk 'NF{a[++n]=$1}END{if(n%2==1)print a[int(n/2)+1] ;else print (a[n/2]+a[int(n/2)+1])/2 }' | sort -n $file
+else
+   echo "Please choose type from min, max, median" 
+fi
