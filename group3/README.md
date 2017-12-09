@@ -46,19 +46,16 @@
 
 //   - prompt (to standard error) the user for the number of points
 
-//   - read (from standard input) in the number of points and then the
-//     points themselves
+//   - read (from standard input) in the number of points and then the points themselves
 
-//   - use your sd() function to find the standard deviation and write
-//     it (alone) to standard output
+//   - use your sd() function to find the standard deviation and write it (alone) to standard output
 
 //
 
 // Hints:
 
-// - If the user types 5 and then 1 2 3 4 5, you should get a standard
-//   deviation of about 1.58.
+// - If the user types 5 and then 1 2 3 4 5, you should get a standard deviation of about 1.58.
 
 // - Redirect stdin to read from a file, if you wish, by making a file
-//   "in" (for "input") containing "5 1 2 3 4 5". Then run "./x < in"
-//   to save typing the input repeatedly.
+   "in" (for "input") containing "5 1 2 3 4 5". Then run "./x < in"
+   to save typing the input repeatedly.
