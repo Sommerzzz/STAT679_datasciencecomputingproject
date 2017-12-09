@@ -1,0 +1,17 @@
+universe = vanilla
+log = hw3-chtc_$(Cluster).log
+error = hw3-chtc_$(Cluster)_$(infile).err
+
+executable = ./hw3.sh
+arguments = cb58_Lyman_break.fit $(infile)
+output = hw3-chtc_$(Cluster)_$(infile).out
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = R.tar.gz, cb58_Lyman_break.fit, hw3.R, /home/groups/stat679/boss/tgz/$(infile).tgz
+
+request_cpus = 1
+request_memory = 1GB
+request_disk = 500MB
+
+queue infile from filename.txt
