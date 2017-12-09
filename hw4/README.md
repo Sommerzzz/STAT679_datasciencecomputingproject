@@ -2,15 +2,25 @@ STAT 679 n-Queens Homework
 
 The Assignment:
 Implement a stack-based backtracking search to find a solution to the n-queens problem by placing n chess queens on an n by n board so that no queen is under attack. This is trivial for n=1, impossible for n=2 and n=3, and possible for n ≥ 4. For example, here is a solution to the 4-queens problem:
+	 
 	  .            0   1   2   3  
+	
 	  .          -----------------
+	  
 	  .        0 |   | Q |   |   |
+	  
 	  .          -----------------
+	  
 	  .        1 |   |   |   | Q |
+	  
 	  .          -----------------
+	  
 	  .        2 | Q |   |   |   |
+	  
 	  .          -----------------
+	  
 	  .        3 |   |   | Q |   |
+	  
 	  .          -----------------
 	
 
