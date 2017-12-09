@@ -1,0 +1,21 @@
+# Run parallel jobs to reformat the current file so it has one word per line
+# and sort the file of words
+
+universe = vanilla
+proc=$INT(Process,%02d)
+log = reformat-chtc_$(Cluster).log
+error = reformat-chtc_$(Cluster)_$(proc).err
+
+executable = ./job1reformatDataFiles.sh
+arguments = $(proc)
+output = sd-chtc_$(Cluster)_$(proc).out
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = reformat.sh,plays.txt.$(proc)
+
+request_cpus = 1
+request_memory = 1GB
+request_disk = 1MB
+
+queue 5

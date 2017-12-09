@@ -1,0 +1,20 @@
+# This "words.dag" script is a Directed Acyclic Graph Manager (DAGMan)
+# meta-scheduler. The code below specifies the following DAG:
+#
+# (pre) pre.sh
+#          |
+#          V
+# (job) job1reformatDataFiles.sub
+#        / | \
+#   five parallel runs of job1reformatDataFiles.sh
+#        \ | /
+#          V
+# (post) job1post.sh
+#
+# Run "condor_submit_dag words.dag" to cause all the code specified in
+# the DAG to run in the correct order.
+
+job 1 job1reformatDataFiles.sub
+
+script pre 1 pre.sh
+script post 1 job1post.sh 
