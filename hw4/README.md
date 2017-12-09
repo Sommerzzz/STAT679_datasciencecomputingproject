@@ -1,46 +1,41 @@
-(Bash) Shell Scripts: Exercises
-• Write a script, digits, to find the sum of the numbers between 1000 and 2000 (inclusive)
-having digits only from the set {0, 1}. (Hint: Use a brace expansion, a loop, and a conditional
-statement including a regular expression. In emacs, run M-x sh-mode to get help with code
-formatting including indenting.)
-• Write a script five_dirs.sh that does these tasks:
-– make a directory five
-– make five subdirectories five/dir1 through five/dir5
-– in each subdirectory, make four files, file1 through file4, such that file1 has one line
-containing the digit 1, file2 has two lines, each containing the digit 2, ..., and file4
-has four lines, each containing the digit 4
-• Write a script rm_n whose usage statement is usage: rm_n <dir> <n> that removes all files
-in directory dir larger than <n> bytes. Try it on your five directory via rm_n five 3.
-Hint: use find. In emacs, do M-x man Enter find Enter to check its man page. The page
-is 1200 lines long–don’t read it all. Just read about its size argument and search within it
-for the text “Numeric arguments.”
-• Write a script, mean.sh, with usage statement usage: mean.sh <column> [file.csv], that
-reads the column specified by <column> (a number) from the comma-separated-values file
-(with header) specified by [file.csv] (or from stdin if no [file.csv] is specified) and
-writes its mean.
-– “mean.sh” in this usage statement should be is specified in your script as $0, so that
-the usage statement will be correct even if you change the script name later.
-– Write the usage statement, which is for humans to read (not for further programs in a
-pipeline), to stderr. One way to do this is via echo. Normally it writes to stdout.
-Redirect stdout to go to stderr via “1>&2” as in echo "hello" 1>&2.
-– By convention, the “<...>” delimiters in “<column>” indicate a required argument, and
-the “[...]” delimiters in “[file.csv]” indicate an optional argument.
-– Here are three example runs:
-∗ mean.sh prints the usage statement
-∗ mean.sh 3 mtcars.csv finds the mean of the third column of mtcars.csv.
-∗ cat mtcars.csv | mean.sh 3 also finds the mean of the third column of mtcars.csv.
-(Here mean.sh 3, with no file specified, reads from stdin.)
-• (optional) Write a script summary whose usage statement is usage: summary <file> <type>.
-It reads from file, a file of one number per line, and, depending on <type> from min, max,
-or median, writes one of the minimum, maximum, or median of the file’s numbers. Do this
-using sort, head, tail, and wc. e.g. summary numbers.txt median writes the median of
-the numbers in numbers.txt.
-What to turn in:
-Write a plain-text file called README that includes information on your group members (1 to several
-students) in the line format NetID,LastName,FirstName. For example, if Wilma Flintstone (NetID:
-wflint3) and Charlie Brown (NetID: cbrown71) worked together, their REAMDME file would be:
-wflint3,Flinstone,Wilma
-cbrown71,Brown,Charlie
-Put five files, README, digits, five_dirs.sh, rm_n, and mean.sh (or six files including summary),
-in a directory group1. From the parent directory of group1, run tar cvf group1.tar group1.
-Turn in group1.tar.
+STAT 679 n-Queens Homework
+
+The Assignment:
+Implement a stack-based backtracking search to find a solution to the n-queens problem by placing n chess queens on an n by n board so that no queen is under attack. This is trivial for n=1, impossible for n=2 and n=3, and possible for n ≥ 4. For example, here is a solution to the 4-queens problem:
+	  .            0   1   2   3  
+	  .          -----------------
+	  .        0 |   | Q |   |   |
+	  .          -----------------
+	  .        1 |   |   |   | Q |
+	  .          -----------------
+	  .        2 | Q |   |   |   |
+	  .          -----------------
+	  .        3 |   |   | Q |   |
+	  .          -----------------
+	
+
+Your program should print a solution if one exists, or "no solution exists" otherwise.
+Goals:
+Increase experience with C++ features including
+template classes and functions
+user-defined functions
+command-line arguments
+the stack abstract data type
+in the context of a famous search problem.
+
+Files you should write (start with our versions):
+Stack.h: The header for a template Stack class. (Caution: "stack.h" is a libary file; our header file has a capital "S".) You do not need to change this file.
+Stack.template: The implementation file for the Stack class. Your stack must be stored in a singly-linked list. This file is done except for Stack::operator[], which you should implement.
+makefile: A file to allow efficient compiling of our multi-file project with the command "make". (Note that files using the template Stack class depend upon Stack.h and Stack.template, but that Stack.template doesn't appear on any of the compile command lines. This is because Stack.h has a line including Stack.template, so that both are seen by the compiler in any file that includes Stack.h.)
+testStack.cxx: A small interactive test program that exercises your Stack code. Add a case to call your Stack::operator[] when the user types "i" and a numeric index in response to the menu. Use this program to test your Stack before writing queens.cxx.
+queens.cxx: A program which runs a stack-based backtracking search to solve the n-queens problem. (Note that there are many ways to solve the n-queens problem. You must use our stack-based backtracking search, since it's part of what we want you to learn in this assignment.) This program takes two command-line arguments, described below. Your output must look at least as good as ours. See the 4x4 board above--its solution is easy to verify by looking at it. (Hint: I found the setw() ("set width") output operator operator helpful. It allows fixed-width output as in this code: int i = 3; cout << setw(2) << i << endl;)
+
+Hint: My solution added about 10 lines of code to Stack.template, 5 to makefile, 5 to testStack.cxx, and 80 to queens.cxx, for a total of about 100 lines of code.
+
+Here are all the above files in one place:
+hw4.tar: a "tape archive" file that you can download and then extract by running "tar xvf hw4.tar". This will create a new directory called "4" containing all the required files.
+
+Here's what to turn in:
+hw4.tar: a "tape archive" file that you create. First clean your directory by running "make clean" and removing junk files. Then run "tar cvf ../hw4.tar .". This will create a tar file of the contents of your "hw4" directory. Make sure your tar file works on stat-679 by copying it to a junk directory and extracting it ("tar xvf hw4.tar"). Then try compiling and running your programs.
+The n-queens problem: Discussion of the assignment
+How to handle command-line arguments
